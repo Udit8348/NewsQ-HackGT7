@@ -3,109 +3,207 @@ import urllib.request
 import re
 import nltk
 import csv
+from ibm_watson import ToneAnalyzerV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+import json
+import string
+from spellchecker import SpellChecker
+from nltk.tokenize import word_tokenize 
+
 
 nltk.download('punkt')
 nltk.download('stopwords')
 
-class Gsearch_python:
-    def __init__(self,name_search):
-      self.name = name_search
-    def Gsearch(self):
-        returnMe = ""
-        count = 0
-        try :
-            from googlesearch import search
-        except ImportError:
-            print("No Module named 'google' Found")
-        count = 1
-        for i in search(query=self.name,tld='co.in',lang='en',num=10,stop=10,pause=2):
-            if count == 1:
-                returnMe = i
-            count += 1
-        return returnMe
+LOG = True
 
-    def summarize(self, url):
-        print("this line worked")
+class Gsearch_python:
+    def getSiteText(self, url):
         try:
             scraped_data = urllib.request.urlopen(url)
             article = scraped_data.read()
             parsed_article = bs.BeautifulSoup(article,'lxml')
-            paragraphs = parsed_article.find_all('div')
+            everything = parsed_article.find_all('div')
+            paragraphs = parsed_article.find_all('p')
+            links = parsed_article.find_all('a')
             article_text = ""
+            everything_text = ""
 
             for p in paragraphs:
                 article_text += p.text
+                article_text += "\n"
 
-            # figure out reader mode
-            # run things liek the mood sentiment, get those scores
-            # hyperlinks (count the number of <a href> tags), is this possible in reader modes
-            # find number of swear words. just .contains off of a pre-existed text file
-            # typo count. go through english dictionary, if word is not there then consider it type - binary search, maybe scratch
-            # quotation count, just go through and count lol
-            # top word frequency - use nltk
-            # input it into a json and give that json to ignacio
-                # each score/data point is a separate column
-            # get a list of working websites (we can start with out existing ones)
+            for x in everything:
+                everything_text += x.text
+                everything_text += "\n"
 
-            article_text = re.sub(r'\[[0-9]*\]', ' ', article_text)
-            article_text = re.sub(r'\s+', ' ', article_text)
-            formatted_article_text = re.sub('[^a-zA-Z]', ' ', article_text )
-            formatted_article_text = re.sub(r'\s+', ' ', formatted_article_text)
-            sentence_list = nltk.sent_tokenize(article_text)
-            stopwords = nltk.corpus.stopwords.words('english')
-            word_frequencies = {}
-            for word in nltk.word_tokenize(formatted_article_text):
-                if word not in stopwords:
-                    if word not in word_frequencies.keys():
-                        word_frequencies[word] = 1
-                    else:
-                        word_frequencies[word] += 1
-            maximum_frequncy = max(word_frequencies.values())
-
-            for word in word_frequencies.keys():
-                word_frequencies[word] = (word_frequencies[word]/maximum_frequncy)
-            sentence_scores = {}
-            for sent in sentence_list:
-                for word in nltk.word_tokenize(sent.lower()):
-                    if word in word_frequencies.keys():
-                        if len(sent.split(' ')) < 30:
-                            if sent not in sentence_scores.keys():
-                                sentence_scores[sent] = word_frequencies[word]
-                            else:
-                                sentence_scores[sent] += word_frequencies[word]
-            import heapq
-            summary_sentences = heapq.nlargest(7, sentence_scores, key=sentence_scores.get)
-
-            summary = ' '.join(summary_sentences)
-            return summary
+            return article_text, len(links)
         except:
             return "Does not allow scraping"
+    
+    def isSwearWord(self, word):
+        f = open("swearWordsList.txt", "r")
+        for swearWord in f:
+            swearWord = swearWord.rstrip("\n")
+            swearWord = swearWord.rstrip(" ")
+            if swearWord.lower() == word.lower():
+                return True
+        return False
+
+    """
+    Anger
+    Fear
+    Joy
+    Sadness
+    Analytical
+    Confident
+    Tentative
+    """
+    def getTones(self, text):
+        TONE_API = {
+            "apikey": "QReFQmlHOdwOU2hUiWPOR42hwi6__BKZFhcfw911Io69",
+            "iam_apikey_description": "Auto-generated for key 96589917-9846-4122-ad95-d7a60221dac8",
+            "iam_apikey_name": "Auto-generated service credentials",
+            "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+            "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/15b5a37df3ea5dc8f6602c7a241775d5::serviceid:ServiceId-3c75134f-9b47-417d-8894-6410345ea2f7",
+            "url": "https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/0c24a35a-1e1a-4363-9e72-44535d4d5eb1"
+        }
+        authenticator = IAMAuthenticator(TONE_API["apikey"])
+        toneAnalyzer = ToneAnalyzerV3(
+            version='2017-09-21',
+            authenticator=authenticator
+        )
+        toneAnalyzer.set_service_url(TONE_API["url"])
+        return toneAnalyzer.tone(
+            {'text': text},
+            content_type='application/json'
+        ).get_result()
+
+    def getUrls(self):
+        urls = []
+        scores = []
+        prov = []
+        with open('training_data.csv') as csvfile:
+            fileReader = csv.reader(csvfile, delimiter=',')
+            for line in fileReader:
+                prov.append(line[0])
+                link = line[1].rstrip("\n")
+                urls.append(link)
+                scores.append(float(line[2]))
+        if(LOG):
+            # print(urls)
+            # print(scores)
+            print()
+        return urls, scores, prov
+        
+        '''
+        for u in f:
+            swearWord = swearWord.rstrip("\n")
+            swearWord = swearWord.rstrip(" ")
+            
+                return True
+        return False
+        '''
 
 if __name__=='__main__':
     # https://www.huffpost.com/entry/fukushima-contaminated-water_n_5f894ae4c5b6dc2d17f5a36e
     # https://teenshealth.org/en/teens/healthy-relationship.html?WT.ac=t-feat
-    # nytimes, cnn, science news, ap news
+    # good: nytimes, cnn, science news, ap news
     # nogo: huff, 
+    # https://apnews.com/article/election-2020-joe-biden-russia-024b553e9a4ffb2716286dd134876f8a
+    # https://www.babbel.com/en/magazine/why-do-we-swear
+    
+    '''
+        x: [quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords]
+        y: Sneha's prediction
+    '''
 
-    url = "https://apnews.com/article/election-2020-joe-biden-russia-024b553e9a4ffb2716286dd134876f8a"
-    gs = Gsearch_python(url)
-    print(gs.summarize(url))
+    gs = Gsearch_python()
+    count = 0
+    dictionary = dict()
+    rescsv = gs.getUrls()
+    urls = rescsv[0]
+    scores = rescsv[1]
+    provider = rescsv[2]
+    xVals = []
+    yVals = []
+    articleVals = []
 
-    # questions = []
-    # with open('questions.csv') as csv_file:
-    #     csv_reader = csv.reader(csv_file, delimiter=',')
-    #     for row in csv_reader:
-    #         questions.append(row)
-    # for question in questions:
-    #     query = question[0]
-    #     query.replace("?", "")
-    #     query = query + " at age 14"
-    #     gs = Gsearch_python(query)
-    #     urlToUse = gs.Gsearch()
-    #     summary = gs.summarize(urlToUse)
-    #     question.append(summary)
-    #     question.append(urlToUse)
-    # with open('answers.csv', mode='w') as answerfile:
-    #     answers = csv.writer(answerfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    #     for row in questions:
-    #         answers.writerow(row)
+    for url in urls:
+        # print(url)
+        res = gs.getSiteText(url)
+        text = res[0]
+        numLinks = res[1]
+
+    
+        quotationCount = 0
+        for char in text:
+            if  (not char.isalpha()) and char == '”' or char == '“':
+                quotationCount += 1
+        if(quotationCount % 2 == 1):
+            quotationCount += 1
+        quotationCount /= 2
+
+        # Tone analyzation
+        
+        joyScore = float(0.00)
+        fearScore = float(0.00)
+        sadnessScore = float(0.00)
+        angerScore = float(0.00)
+        analyticalScore = float(0.00)
+        confidentScore = float(0.00)
+        tentativeScore = float(0.00)
+        for tone in gs.getTones(text)['document_tone']['tones']:
+            if tone['tone_name'] == "Joy":
+                joyScore = float(tone['score'])
+            elif tone['tone_name'] == "Fear":
+                fearScore = float(tone['score'])
+            elif tone['tone_name'] == "Sadness":
+                sadnessScore = float(tone['score'])
+            if tone['tone_name'] == "Anger":
+                angerScore = float(tone['score'])
+            if tone['tone_name'] == "Analytical":
+                analyticalScore = float(tone['score'])
+            if tone['tone_name'] == "Confident":
+                confidentScore = float(tone['score'])
+            if tone['tone_name'] == "Tentative":
+                tentativeScore = float(tone['score'])
+
+        
+        textListFull = word_tokenize(text)
+        textList = [word for word in textListFull if word.isalpha()]
+
+
+        # figure out reader mode
+        # [done] run things like the mood sentiment, get those scores
+            # Joy, Fear, Sadness, Anger, Analytical, Confident, and Tentative
+        # [done] hyperlinks (count the number of <a href> tags), is this possible in reader modes?
+        # [done] find number of swear words. just .contains off of a pre-existed text file
+        # [done] typo count. go through english dictionary, if word is not there then consider it type - binary search, maybe scratch
+        # [done] quotation count, just go through and count lol
+        # top word frequency - use nltk
+        # input it into a json and give that json to ignacio
+            # each score/data point is a separate column
+        # [done] get a list of working websites (we can start with out existing ones)
+
+        numSwearWords = 0
+        numTypo = 0
+        spell = SpellChecker()
+        spell.word_frequency.load_words(['covid', 'quarantining', 'sanitizing', 'hospitalizations', 'website', 'COVID-19'])
+
+        for word in textList:
+            numTypo += len(spell.unknown([word]))
+            if gs.isSwearWord(word):
+                numSwearWords += 1
+        articleVals.append([provider[count], url])
+        xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords])
+        yVals.append(scores[count])
+        count += 1
+
+    dictionary['ARTICLES'] = articleVals
+    dictionary['X'] = xVals
+    dictionary['Y'] = yVals
+    
+    with open("json_training_data.json", "w") as outfile:
+        json.dump(dictionary, outfile, sort_keys=True, indent=4)
+
+    print(dictionary)
