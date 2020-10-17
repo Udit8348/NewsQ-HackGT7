@@ -1,0 +1,7 @@
+# System Setup Files
+.vscode/
+.DS_Store
+
+# Local Testing Files
+notes.txt
+*test*
