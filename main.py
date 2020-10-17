@@ -189,13 +189,14 @@ if __name__=='__main__':
         numTypo = 0
         spell = SpellChecker()
         spell.word_frequency.load_words(['covid', 'quarantining', 'sanitizing', 'hospitalizations', 'website', 'COVID-19'])
+        wordCount = len(textList)
 
         for word in textList:
             numTypo += len(spell.unknown([word]))
             if gs.isSwearWord(word):
                 numSwearWords += 1
         articleVals.append([provider[count], url])
-        xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords])
+        xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords, numLinks, wordCount])
         yVals.append(scores[count])
         count += 1
 

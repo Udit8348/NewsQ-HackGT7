@@ -14,7 +14,7 @@ def getModel(X:np.array, Y:np.array) -> tf.keras.Sequential:
         tf.keras.layers.Dense(units = 1, input_shape=(X.shape[1],), activation='sigmoid'),
     ])
     model.compile(optimizer='sgd', loss='mse')
-    train_history = model.fit(X, Y, epochs=100000)
+    train_history = model.fit(X, Y, epochs=20000)
     """
     W_tf, b_tf = [x.numpy() for x in model.weights]
     print(W_tf, b_tf)
