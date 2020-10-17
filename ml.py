@@ -14,7 +14,7 @@ def getModel(X:np.array, Y:np.array) -> tf.keras.Sequential:
         tf.keras.layers.Dense(units = 1, input_shape=(X.shape[1],), activation='sigmoid'),
     ])
     model.compile(optimizer='sgd', loss='mse')
-    train_history = model.fit(X, Y, epochs=100)
+    train_history = model.fit(X, Y, epochs=100000)
     """
     W_tf, b_tf = [x.numpy() for x in model.weights]
     print(W_tf, b_tf)
@@ -53,7 +53,7 @@ def parseJSONFile(filename:str) -> Tuple[Tuple[str, str], List[List[float]], Lis
     return [], np.zeros(0), np.zeros(0)
 
 def main() -> None:
-    ARTICLES, X, Y = parseJSONFile("temp.json")
+    ARTICLES, X, Y = parseJSONFile("json_training_data.json")
     print(ARTICLES)
     print(X)
     print(Y)
@@ -63,7 +63,7 @@ def main() -> None:
     scaler.fit(X)
     normalizedX = scaler.transform(X)
     model = getModel(normalizedX, Y)
-    print(model.predict(np.array(normalizedX[-1])))
+    print(model.predict(normalizedX))
 
 if __name__ == "__main__":
     main()
