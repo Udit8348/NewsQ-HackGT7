@@ -1,3 +1,0 @@
-create a team in dev post & a team name
-compare to the fact check database
-register a domain name
