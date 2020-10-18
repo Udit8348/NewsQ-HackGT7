@@ -17,6 +17,6 @@
 Megan Dass <mdass1001@gmail.com>\
 Ignacio Di Leva <idileva@gatech.edu>\
 Sneha Roy <sroy326@gatech.edu>\
-Udit Subramanya <usubramanya91@gmail.com>
+Udit Subramanya <usubramanya3@gatech.edu>
 
 
