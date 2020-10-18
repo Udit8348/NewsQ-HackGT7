@@ -2,21 +2,245 @@
 <html lang='en'>
 <head>
   <meta charset="utf-8" />
-  <title>Hello world!</title>
-  <link type="text/css" rel="stylesheet"
-        href="{{ url_for('static',
-              filename='hello.css')}}" />
+  <title>NewsReel | Nuclide</title>
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      <style>
+            @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Montserrat:wght@500&display=swap');
+            a {
+                  text-decoration: none;
+                  color: black;
+            }
+
+            .Link-wrapper {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  justify-content: space-between;
+                  border-bottom: 1px solid gray;
+                  padding: 50px 20px;
+                  font-family: 'Montserrat';
+            }
+
+            .Links-container {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+            }
+
+            .Link-picandscore {
+                  display: flex;
+                  flex-direction: column;
+                  font-size: 1.5rem;
+                  justify-content: center;
+                  height: 100%;
+            }
+
+            .Description {
+                  text-align: center;
+                  font-family: 'Montserrat';
+                  font-size: 2rem; 
+            }
+
+            .Heading {
+                  text-align: center;
+                  font-family: 'Montserrat';
+                  font-size: 4rem;
+            }
+
+            .Link-rank {
+                  font-size: 3rem;
+            }
+
+            .Link-url {
+                  font-size: 1.5rem;
+                  text-align: center;
+                  padding: 10px;
+                  color: black;
+                  text-decoration: underline;
+            }
+
+            .Link-urlTitle {
+                  font-size: 1.5rem;
+                  text-align: center;
+                  color: black;
+            }
+
+            .Link-picture {
+                  width: 200px;
+            }
+
+            .Link-rankTitle {
+                  font-size: 1.5rem;
+            }
+
+            .Link-picandscoretitle {
+                  display: flex;
+                  flex-direction: row;
+                  font-size: 1.5rem;
+                  justify-content: center;
+                  height: 100%;
+            }
+
+            .tooltip {
+                  position: relative;
+            }
+
+            .tooltip .tooltipText {
+                  visibility: hidden;
+                  width: 300px;
+                  font-size: 1rem;
+                  border-radius: 6px;
+                  padding: 5px;
+                  position: absolute;
+                  z-index: 1;
+                  bottom: 125%;
+                  left: 50%;
+                  margin-left: -60px;
+                  opacity: 0;
+                  transition: opacity 0.3s;
+                  background: #e0e0e0;
+                  font-weight: normal;
+            }
+
+            .tooltip:hover .tooltipText {
+                  visibility: visible;
+                  opacity: 1;
+            }
+
+            .questionmark {
+                  border-radius: 50%;
+                  border: 1px dotted gray;
+                  padding-right: 3px;
+                  padding-left: 3px;
+                  margin-left: 10px
+            }
+
+            .Link:hover {
+                  background-color: #e0e0e0;
+                  opacity: 75%;
+            }
+
+            .Link {
+                  width: 75%;
+            }
+
+            .Link-wrapperTitle {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  justify-content: space-between;
+                  border-bottom: 1px solid gray;
+                  padding: 50px 20px;
+                  font-family: 'Montserrat';
+                  font-weight: bold;
+                  width: 75%;
+            }
+
+            .Url {
+                  display: none;
+            }
+
+            .Url.is-visible {
+                  display: flex;
+            }
+
+            .Input {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-top: 15px;
+                  font-family: 'Montserrat';
+                  font-size: 1.5rem;
+            }
+
+            .Input-label {
+                  padding-right: 10px;
+            }
+
+            .Input-text {
+                  height: 30px;
+                  width: 500px;
+                  margin-right: 10px;
+            }
+
+            .submit {
+                  height: 30px;
+            }
+
+            .Url {
+                  align-items: center;
+                  justify-content: center;
+                  padding-top: 10px;
+                  font-family: 'Montserrat';
+                  font-size: 1.5rem;
+            }
+
+            .Url-label {
+                  padding-right: 7px;
+            }
+
+            .Url-title {
+                  padding-right: 7px;
+            }
+
+            .Url-score {
+                  font-weight: bold;
+            }
+
+            .Link-containerTitle {
+                  width: 75%;
+            }
+
+
+      </style>
+
+
 </head>
 <body>
       <h1 class="Heading">
-            Team name
+            NewsReel
       </h1>
       <div class="Description">
-            Description here
+            A collection of UK based Coronavirus Articles sorted by Artifical Intelligence
       </div>
-      <div class="Links-container" id="js-links-wrapper">
+      <div class="Input">
+            <div class="Input-label">Input an Article URL:</div>
+            <input type="text" id="js-input-url" name="fname" class="Input-text"><br>
+            <button class="submit" type="button" id="js-submit-button">Submit</button>
       </div>
-      <script type="text/javascript" src="data.json"></script>
+      <div class="Url" id="js-url">
+            <div class="Url-label">
+                  Score for
+            </div>
+            <div class="Url-title" id="js-url-title">
+            </div>
+            <div class="Url-score" id="js-url-score">
+            </div>
+      </div>
+            <div class="Links-container" id="js-links-wrapper">
+                  <div class= "Link-wrapperTitle">
+                        <div class="Link-rankTitle">
+                              Rank
+                        </div>
+                        <div class="Link-urlTitle">
+                              Article Title
+                        </div>
+                        <div class="Link-picandscoretitle">
+                              Source and Our Score
+                              <div class="tooltip">
+                                    <div class="questionmark">
+                                    ?
+                                    </div>
+                                    <span class="tooltipText">We use a logistic regression model that outputs a score between 0 and 100%. 
+                                          This is a measure of how legitimate the article seems to be. 
+                                          The higher this value is, the higher it will be ranked among the other articles.
+                                    </span>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            
       <script>
             // read the json with all of the links
             // display the link and a picture of the sponsor
@@ -25,22 +249,142 @@
             // <div class="Link-wrapper">
             //    <div class="Link-rank">
             //    <div class="Link-picture">
-            //    <a class="Title" href=link>
+            //    <a class="Link-url" href=link>
+            //    <div class="Link-score">
             var linksContainer = document.getElementById("js-links-wrapper");
-            //var mydata = JSON.parse(data);
-            var links = ["google.com"] //get this from mydata
-            for (var i = 0; i < links.length; i++) {
-                  var wrapper = document.createElement("div");
-                  var rank = document.createElement("div")
-                  var link = document.createElement("a");
-                  wrapper.appendChild(rank);
-                  wrapper.appendChild(link);
-                  linksContainer.appendChild(wrapper);
-                  rank.innerHTML = i + 1;
-                  link.href = links[i];
-                  link.innerHTML = "Google";
-                  link.title = "Google";
+            var inputURLdiv = document.getElementById("js-input-url");
+            var submitButton = document.getElementById("js-submit-button");
+            var urlWrap = document.getElementById("js-url");
+            var inputURL = "";
+
+            /*submitButton.onclick = function() {
+                  inputURL = inputURLdiv.innerHTML;
+                  location.replace("http://nuclide.tech/evaluate/?url=" + inputURL);
+            }*/
+
+            function press(){
+                  var inputURLdiv = document.getElementById("js-input-url");
+                  fetch("/evaluate/?url=" + inputURLdiv.value).then(
+                        (data) => {
+                              data.text().then(
+                                    (text) => {
+                                          console.log(text)
+                                          score = JSON.parse(text)["score"] * 100;
+                                          score = score.toFixed(2);
+                                          label = document.getElementById("js-url-score");
+                                          label.innerHTML = score.toString() + "%";
+                                          title = document.getElementById("js-url-title");
+                                          title.innerHTML = "\"" + JSON.parse(text)["title"] + "\": ";
+                                          urlWrap.classList.add("is-visible");
+                                    }
+                              )
+                        }
+                  );
             }
+
+            submitButton.onclick = press;
+
+            $.getJSON("static/data2.json", function(data) {
+                  console.log(data);
+                  for (var i = 0; i < data.length; i++) {
+                        var list = data[i];
+                        var prov = data[i][0];
+                        var url = data[i][1];
+                        var titleVal = data[i][2];
+                        var score = data[i][3] * 100;
+                        score = score.toFixed(2);
+                        var wrapperdiv = document.createElement("div");
+                        wrapperdiv.className = "Link-wrapper";
+                        var rankdiv = document.createElement("div");
+                        rankdiv.className = "Link-rank";
+                        var linkdiv = document.createElement("a");
+                        linkdiv.className = "Link-url";
+                        var scorediv = document.createElement("div");
+                        scorediv.className = "Link-score";
+                        var picandscorediv = document.createElement("div");
+                        picandscorediv.className = "Link-picandscore"
+                        var picdiv = document.createElement("img");
+                        picdiv.className = "Link-picture";
+                        var overalldiv = document.createElement("a");
+                        overalldiv.className= "Link";
+
+                        if (url.includes("theguardian")) {
+                              picdiv.src = "https://logos-download.com/wp-content/uploads/2016/05/The_Guardian_logo_logotype.png";
+                              picdiv.alt = "The Guardian Logo"
+                        } else if (url.includes("thesun")) {
+                              picdiv.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/The_Sun.svg/1200px-The_Sun.svg.png";
+                              picdiv.alt = "The Sun Logo"
+                        } else if (url.includes("independent")) {
+                              picdiv.src = "https://media-exp1.licdn.com/dms/image/C4D1BAQGGK79pw2jSGA/company-background_10000/0?e=2159024400&v=beta&t=NxPPPT-Ou-wQpN3UbS0lvOib4K4CqJLiMRFLHa8F9Ys";
+                              picdiv.alt = "Independent Logo"
+                        } else if (url.includes("telegraph")) {
+                              picdiv.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR_QvTjgV3dLR_rCwKFJ8m-iBsf35RDakHguQ&usqp=CAU";
+                              picdiv.alt = "Telegraph logo"
+                        } else if (url.includes("cnn")) {
+                              picdiv.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/900px-CNN.svg.png";
+                              picdiv.alt = "CNN logo";
+                        } else if (url.includes("prnewswire")) {
+                              picdiv.src = "https://photos.prnewswire.com/prnfull/20130117/NY44355LOGO-a";
+                              picdiv.alt = "PR Newswire Logo"
+                        } else if (url.includes("socialistworker")) {
+                              picdiv.src = "https://www.socialworker.com/downloads/1553/download/2018-socialworkmonth-logo.png?cb=91bdab85ac3fd3d77c33314c6bcbe326";
+                              picdiv.alt = "Socialist Worker";
+                        } else if (url.includes("metro")) {
+                              picdiv.src = "https://www.logolynx.com/images/logolynx/86/86eee7b79ac582ccf87d3f1d5cf376a3.png";
+                              picdiv.alt = "Metro Logo";
+                        } else if (url.includes("ft.com")) {
+                              picdiv.src = "https://res.cloudinary.com/dwccfildc/c_limit,f_auto,w_1140/v1533541165/refugees/turnkeyimage/8b6433cc62e5498e997affff4bb271d2/image.jpg";
+                              picdiv.alt = "Financial Times Logo";
+                        } else if (url.includes("standard.co")) {
+                              picdiv.src = "https://d24j9r7lck9cin.cloudfront.net/l/o/1/1569.1433428864.png";
+                              picdiv.alt = "Standard Logo";
+                        } else if (url.includes("dailystar")) {
+                              picdiv.src = "https://epaper.thedailystar.net//img/logo/logo.png";
+                              picdiv.alt = "Daily Star Logo"
+                        } else if (url.includes("dailymail")) {
+                              picdiv.src = "https://assets.stickpng.com/images/5847f47bcef1014c0b5e4894.png";
+                              picdiv.alt = "Daily Mail Logo";
+                        } else if (url.includes("express.co")) {
+                              picdiv.src = "https://www.newsworks.org.uk/write/MediaUploads/1%20Facts%20Figures/Titles%20at%20a%20glance/Daily%20Express/310DailyExpress.gif";
+                              picdiv.alt = "Express Logo"
+                        } else if (url.includes("cdc.gov")) {
+                              picdiv.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/US_CDC_logo.svg/1017px-US_CDC_logo.svg.png";
+                              picdiv.alt = "CDC Logo"
+                        } else if (url.includes("gov.uk")) {
+                              picdiv.src = "https://abopen.com/app/uploads/2018/03/dmcs-crest.jpg";
+                              picdiv.alt = "UK Government Logo"
+                        } else if (url.includes("travelhealthpro")) {
+                              picdiv.src = "https://gnholidays.com/wp-content/uploads/2017/07/Travel_Health_Pro801x336.png";
+                              picdiv.alt = "Travel Health Pro Logo"
+                        } else if (url.includes("nhs.uk")) {
+                              picdiv.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/NHS-Logo.svg/1280px-NHS-Logo.svg.png";
+                              picdiv.alt = "NHS Logo";
+                        } else if (url.includes("newscientist")) {
+                              picdiv.src = "https://media.info/i/lf/0/1582633003/3622.png";
+                              picdiv.alt = "New Scientist Logo"
+                        } else if (url.includes("bbc.com")) {
+                              picdiv.src = "https://ioncell.fi/wp/wp-content/uploads/2018/06/BBC-logo-for-web.jpg";
+                              picdiv.alt = "BBC Logo"
+                        }
+
+                        rankdiv.innerHTML = i + 1;
+                        linkdiv.href = url;
+                        linkdiv.innerHTML = titleVal;
+                        linkdiv.title = titleVal;
+                        scorediv.innerHTML = "Our score: " + score + "%";
+                        overalldiv.href = url;
+
+
+                        picandscorediv.appendChild(picdiv);
+                        picandscorediv.appendChild(scorediv);
+                        console.log(wrapperdiv);
+                        wrapperdiv.appendChild(rankdiv);
+                        wrapperdiv.appendChild(linkdiv)
+                        wrapperdiv.appendChild(picandscorediv);
+                        overalldiv.appendChild(wrapperdiv);
+                        linksContainer.appendChild(overalldiv);
+                  }
+            });
             
       </script>
 

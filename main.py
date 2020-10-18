@@ -10,6 +10,7 @@ import string
 from spellchecker import SpellChecker
 from nltk.tokenize import word_tokenize 
 
+quoteRegex = re.compile('“|”|‘|’\s|’[.,;:!?]')
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -22,6 +23,37 @@ class Gsearch_python:
             scraped_data = urllib.request.urlopen(url)
             article = scraped_data.read()
             parsed_article = bs.BeautifulSoup(article,'lxml')
+            #BBC Covid: Confusion over fresh talks in Manchester tier row - BBC News
+            #New Scientist: Covid-19 news: Remdesivir has little effect on survival, finds WHO | New Scientist
+            #GOV.UK: Coronavirus (COVID-19): guidance and support - GOV.UK
+            #CDC: COVID-19 in the United Kingdom - Warning - Level 3, Avoid Nonessential Travel - Travel Health Notices | Travelers' Health | CDC
+            #Express: Jeremy Corbyn HUMILIATION: Former Labour leader flouts COVID rules at ‘memorial carnival’  | UK | News | Express.co.uk
+            #Daily Mail: Global coronavirus cases rise by more than 400,000 in one day for the first time | Daily Mail Online
+            #Daily Star: Brits told to self-isolate by NHS Test and Trace may have details handed to police - Daily Star
+            #London Evening Standard: UK coronavirus deaths up by 150 as cases jump by 16,171 | London Evening Standard
+            #Financial Times: Colombia after Covid-19 | Financial Times
+            #The Guardian: Coronavirus: 1 million young Britons ‘face jobs crisis within weeks’ | Coronavirus | The Guardian
+            #Metro News: More than 220 Cambridge students told to self-isolate after 18 cases in halls | Metro News
+            #CNN: Britain's BAME communities cherished multigenerational living. But Covid-19 has changed all that - CNN
+            #Independent: Coronavirus has made me into an undocumented immigrant in my home country
+            #The Sun Hope Hicks joins Trump at rally after both recovered from Covid-19 and jokes 'now we can share a microphone'
+            title = ""
+            try:
+                titletag = parsed_article.find_all('title')
+                title = titletag[0].text
+                firstHyphen = title.find(" - ")
+                firstPipe = title.find("|")
+                if firstHyphen == -1 and firstPipe == -1:
+                    title = title.strip()
+                elif firstPipe == -1:
+                    title = title[:firstHyphen].strip()
+                elif firstHyphen == -1:
+                    title = title[:firstPipe].strip()
+                else:
+                    title = title[:min(firstHyphen, firstPipe)].strip()
+            except:
+                if LOG: print("Bad title")
+            
             everything = parsed_article.find_all('div')
             paragraphs = parsed_article.find_all('p')
             links = parsed_article.find_all('a')
@@ -36,7 +68,7 @@ class Gsearch_python:
                 everything_text += x.text
                 everything_text += "\n"
 
-            return article_text, len(links)
+            return article_text, len(links), title
         except:
             return None
     
@@ -80,20 +112,20 @@ class Gsearch_python:
 
     def getUrls(self):
         urls = []
-        # scores = []
+        scores = []
         prov = []
-        with open('check_data.csv') as csvfile:
+        with open('training_data_2.csv') as csvfile:
             fileReader = csv.reader(csvfile, delimiter=',')
             for line in fileReader:
                 prov.append(line[0])
                 link = line[1].rstrip("\n")
                 urls.append(link)
-                # scores.append(float(line[2]))
+                scores.append(float(line[2]))
         if(LOG):
             # print(urls)
             # print(scores)
             print()
-        return urls, prov
+        return urls, prov, scores
         
         '''
         for u in f:
@@ -122,8 +154,8 @@ if __name__=='__main__':
     dictionary = dict()
     rescsv = gs.getUrls()
     urls = rescsv[0]
-    # scores = rescsv[1]
     provider = rescsv[1]
+    scores = rescsv[2]
     xVals = []
     yVals = []
     articleVals = []
@@ -136,15 +168,22 @@ if __name__=='__main__':
             if len(text.encode('utf-8')) < 131072:
                 numLinks = res[1]
                 print(numLinks)
-
+                title = res[2]
             
                 quotationCount = 0
+
+                for i in range(len(text)-1):
+                    quotationCount += len(re.findall(quoteRegex, text[i:i+1]))
+                quotationCount += len(re.findall(quoteRegex, text[-1]))
+                """
                 for char in text:
                     if  (not char.isalpha()) and char == '”' or char == '“':
                         quotationCount += 1
+                """
                 if(quotationCount % 2 == 1):
                     quotationCount += 1
                 quotationCount /= 2
+                if LOG: print(url, quotationCount)
 
                 # Tone analyzation
                 
@@ -198,16 +237,16 @@ if __name__=='__main__':
                     numTypo += len(spell.unknown([word]))
                     if gs.isSwearWord(word):
                         numSwearWords += 1
-                articleVals.append([provider[count], url])
+                articleVals.append([provider[count], url, title])
                 xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords, numLinks, wordCount])
-                # yVals.append(scores[count])
+                yVals.append(scores[count])
         count += 1
 
     dictionary['ARTICLES'] = articleVals
     dictionary['X'] = xVals
-    # dictionary['Y'] = yVals
+    dictionary['Y'] = yVals
     
-    with open("json_check_data.json", "w") as outfile:
+    with open("json_training_data_2.json", "w") as outfile:
         json.dump(dictionary, outfile, sort_keys=True, indent=4)
 
     print(dictionary)

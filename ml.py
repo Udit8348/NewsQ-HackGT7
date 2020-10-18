@@ -26,7 +26,7 @@ def getModel(X:np.array, Y:np.array) -> tf.keras.Sequential:
     """
     return model
 
-def parseCSVFile(filename:str) -> Tuple[Tuple[str, str], List[List[float]], List[float]]:
+def parseCSVFile(filename:str) -> Tuple[Tuple[str, str, str], List[List[float]], List[float]]:
     ARTICLES = []
     Y = []
     X = []
@@ -35,34 +35,34 @@ def parseCSVFile(filename:str) -> Tuple[Tuple[str, str], List[List[float]], List
             #f.readline()
             while True:
                 data = f.readline().rstrip("\n").split(",")
-                if len(data) < 3: break
-                ARTICLES.append((data[0], data[1]))
-                Y.append(float(data[2]))
-                X.append(list(map(lambda x: float(x), data[3:])))
+                if len(data) < 4: break
+                ARTICLES.append((data[0], data[1], data[2]))
+                Y.append(float(data[3]))
+                X.append(list(map(lambda x: float(x), data[4:])))
     except IOError:
         pass
     return ARTICLES, np.array(X), np.array(Y)
 
-def parseJSONFile(filename:str) -> Tuple[Tuple[str, str], List[List[float]], List[float]]:
+def parseJSONFile(filename:str) -> Tuple[Tuple[str, str, str], List[List[float]], List[float]]:
     try:
         with open(filename, "r") as f:
             data = json.load(f)
-            return list(map(lambda x: tuple(x), data["ARTICLES"])), np.array(data["X"]), np.array(data["Y"]) 
+            return data["ARTICLES"], np.array(data["X"]), np.array(data["Y"]) 
     except IOError:
         pass
     return [], np.zeros(0), np.zeros(0)
 
-def parseJSONFileNoY(filename:str) -> Tuple[Tuple[str, str], List[List[float]], List[float]]:
+def parseJSONFileNoY(filename:str) -> Tuple[Tuple[str, str, str], List[List[float]], List[float]]:
     try:
         with open(filename, "r") as f:
             data = json.load(f)
-            return list(map(lambda x: tuple(x), data["ARTICLES"])), np.array(data["X"])
+            return data["ARTICLES"], np.array(data["X"])
     except IOError:
         pass
     return [], np.zeros(0), np.zeros(0)
 
 def main() -> None:
-    ARTICLES, X, Y = parseJSONFile("json_training_data.json")
+    ARTICLES, X, Y = parseJSONFile("json_training_data_2.json")
     print(ARTICLES)
     print(X)
     print(Y)
@@ -72,17 +72,17 @@ def main() -> None:
     scaler.fit(X)
     normalizedX = scaler.transform(X)
     model = getModel(normalizedX, Y)
-    NEW_ARTICLES, NEW_X = parseJSONFileNoY("json_output_data.json")
+    NEW_ARTICLES, NEW_X = parseJSONFileNoY("json_output_data_2.json")
     scaler.fit(NEW_X)
     normalizedNEW_X = scaler.transform(NEW_X)
     predictions = model.predict(normalizedNEW_X)
     print(predictions)
     result = []
     for i in range(len(NEW_ARTICLES)):
-        result.append([NEW_ARTICLES[i][0], NEW_ARTICLES[i][1], float(predictions[i][0])])
-    result.sort(key = lambda x: x[2], reverse = True)
-    with open("final.json", "w") as f:
-        f.write(str(result).replace("'", "\""))
+        result.append([NEW_ARTICLES[i][0], NEW_ARTICLES[i][1], NEW_ARTICLES[i][2], float(predictions[i][0])])
+    result.sort(key = lambda x: x[3], reverse = True)
+    with open("final2.json", "w") as f:
+        json.dump(result, f)
     print(*result, sep = "\n")
 
 if __name__ == "__main__":

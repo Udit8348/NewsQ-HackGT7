@@ -9,7 +9,7 @@ New Scientist,https://www.newscientist.com/article/2237475-covid-19-news-record-
 NHS,https://www.nhs.uk/conditions/coronavirus-covid-19/
 Travel Health Pro,https://travelhealthpro.org.uk/news/499/novel-coronavirus-covid-19-general-advice-for-travellers
 UK Gov,https://www.gov.uk/coronavirus
-cdc,https://wwwnc.cdc.gov/travel/notices/warning/coronavirus-united-kingdom
+CDC,https://wwwnc.cdc.gov/travel/notices/warning/coronavirus-united-kingdom
 Express,https://www.express.co.uk/news/uk/1349062/jeremy-corbyn-news-jeremy-corbyn-coronavirus-rule-break-party-corbyn-pictures
 Express,https://www.express.co.uk/news/uk/1349046/coronavirus-latest-news-schools-boris-johnson-circuit-breaker-half-term
 Express,https://www.express.co.uk/news/royal/1349086/Queen-health-queen-Elizabeth-ii-coronavirus-vaccine-royal-family-news-evg
@@ -24,16 +24,16 @@ Daily Star,https://www.dailystar.co.uk/news/anti-lockdown-protesters-swarm-londo
 Daily Star,https://www.dailystar.co.uk/news/latest-news/breaking-wales-face-two-week-22862617
 Daily Star,https://www.dailystar.co.uk/news/latest-news/queen-used-government-boost-public-22862288
 Daily Star,https://www.dailystar.co.uk/news/latest-news/harrowing-video-shows-coronavirus-patients-22860826
-Standard,https://www.standard.co.uk/news/uk/uk-coronavirus-cases-today-deaths-a4572002.html
-Standard,https://www.standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html
-Standard,https://www.standard.co.uk/news/uk/wales-circuitbreaker-lockdown-friday-a4572006.html
-Standard,http://standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html
-Standard,https://www.standard.co.uk/news/uk/sage-coronavirus-pandemic-not-changing-a4571934.html
-Ft,https://www.ft.com/reports/colombia-covid
-Ft,https://www.ft.com/content/33860194-546a-42cd-92ca-a0ca3703e95c
-Guardian,https://www.theguardian.com/world/2020/oct/17/coronavirus-1-million-young-britons-face-jobs-crisis-within-weeks
-Guardian,https://www.theguardian.com/world/live/2020/oct/17/coronavirus-live-news-us-cases-pass-8m-hope-in-victoria-after-just-one-new-case-recorded
-Guardian,https://www.theguardian.com/world/2020/oct/17/coronavirus-us-records-highest-daily-case-total-since-july
+Evening Standard,https://www.standard.co.uk/news/uk/uk-coronavirus-cases-today-deaths-a4572002.html
+Evening Standard,https://www.standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html
+Evening Standard,https://www.standard.co.uk/news/uk/wales-circuitbreaker-lockdown-friday-a4572006.html
+Evening Standard,http://standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html
+Evening Standard,https://www.standard.co.uk/news/uk/sage-coronavirus-pandemic-not-changing-a4571934.html
+Financial Times,https://www.ft.com/reports/colombia-covid
+Financial Times,https://www.ft.com/content/33860194-546a-42cd-92ca-a0ca3703e95c
+The Guardian,https://www.theguardian.com/world/2020/oct/17/coronavirus-1-million-young-britons-face-jobs-crisis-within-weeks
+The Guardian,https://www.theguardian.com/world/live/2020/oct/17/coronavirus-live-news-us-cases-pass-8m-hope-in-victoria-after-just-one-new-case-recorded
+The Guardian,https://www.theguardian.com/world/2020/oct/17/coronavirus-us-records-highest-daily-case-total-since-july
 Metro,https://metro.co.uk/2020/10/17/more-than-220-cambridge-students-told-to-self-isolate-after-18-cases-in-halls-13439699/
 Metro,https://metro.co.uk/2020/10/17/wales-set-for-17-day-circuit-break-lockdown-next-week-leaked-letter-claims-13439540/
 Metro,https://metro.co.uk/2020/10/17/confusion-for-greater-manchester-as-row-between-no-10-and-andy-burnham-continues-13438415/
@@ -47,21 +47,12 @@ Socialist Worker,https://socialistworker.co.uk/art/50791/Students+and+workers+de
 Socialist Worker,https://socialistworker.co.uk/art/50790/Facebook+workers+speak+out+++Bosses+are+taking+advantage+of+Covid+19+to+attack+us
 Socialist Worker,https://socialistworker.co.uk/art/50776/Three+tier+lockdown+system+is+not+enough+to+contain+coronavirus
 Socialist Worker,https://socialistworker.co.uk/art/50763/Battle+on+for+safety+after+London+bus+drivers+death
-PMEWSWIRE,https://www.prnewswire.co.uk/news-releases/non-limited-life-medical-cylinder-launched-by-luxfer-as-covid-19-increases-demand-for-solutions-to-help-millions-with-respiratory-conditions-887514683.html
-Guardian,https://www.theguardian.com/commentisfree/2020/oct/11/as-the-tide-of-coronavirus-swells-again-boris-johnson-heads-into-a-perfect-storm
+PR Newswire,https://www.prnewswire.co.uk/news-releases/non-limited-life-medical-cylinder-launched-by-luxfer-as-covid-19-increases-demand-for-solutions-to-help-millions-with-respiratory-conditions-887514683.html
+The Guardian,https://www.theguardian.com/commentisfree/2020/oct/11/as-the-tide-of-coronavirus-swells-again-boris-johnson-heads-into-a-perfect-storm
 CNN,https://www.cnn.com/2020/10/16/uk/multi-generational-households-coronavirus-gbr-intl/index.html
 CNN,https://www.cnn.com/2020/10/16/business/uk-brexit-deal-economy/index.html
 CNN,https://www.cnn.com/2020/10/16/uk/london-coronavirus-restrictions-gbr-intl/index.html
 Telegraph,https://www.telegraph.co.uk/politics/2020/10/17/tony-blair-accused-breaking-quarantine-rules-us-trip/
-The Sun,https://www.thesun.co.uk/news/12955738/wayne-rooneuy-covid-fear-pal-watch-infected/
-The Sun,https://www.thesun.co.uk/news/12955395/150m-pizzas-40m-curries-brits-lockdown/
-The Sun,https://www.thesun.co.uk/news/12956900/hope-hicks-trump-rally-covid-microphone-ocala-florida/
-The Sun,https://www.thesun.co.uk/news/12955044/keir-starmer-two-faced-covid-brexit/
-The Sun,https://www.thesun.co.uk/news/12952952/barbershop-covid-conspiracy-shut-down-shunning-masks/
-The Sun,https://www.thesun.co.uk/news/12949422/tier-2-lockdown-rules-boris-johnson-confused/
-The Sun,https://www.thesun.co.uk/news/12949279/government-graph-tiny-proportion-coronavirus-hospital-under-65/
-The Sun,https://www.thesun.co.uk/news/uknews/12953479/coronavirus-cases-deaths-total-uk/
-The Sun,https://www.thesun.co.uk/news/uknews/12953943/anti-mask-protest-london-tier-2-lockdown/
 The Guardian,https://www.theguardian.com/commentisfree/2020/oct/03/the-observer-view-on-donald-trumps-coronavirus-infection
 The Guardian,https://www.theguardian.com/world/2020/oct/17/covid-reinfections-to-be-expected-as-virus-spreads-say-government-scientists
 The Guardian,https://www.theguardian.com/world/2020/oct/16/coronavirus-covid-19-cases-us-8-million
