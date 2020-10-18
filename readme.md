@@ -1,6 +1,6 @@
 ## NewsReel
-#### [NewsReel Website](newsreel.nuclide.tech)
-#### [Design Document](https://www.google.com/url?q=https://drive.google.com/file/d/1pTJ9m88R7vYW9w-dqvYAWBwB5jZeFq-i/view?usp%3Dsharing&sa=D&ust=1603023266477000&usg=AFQjCNFHBBd7kCEV1PYbhXwgdnNhmAEZEQ)
+#### [NewsReel Website](http://newsreel.nuclide.tech/)
+#### [Design Document](https://drive.google.com/file/d/1pTJ9m88R7vYW9w-dqvYAWBwB5jZeFq-i/view)
 #### [Recorded Presentation - Youtube](https://youtu.be/zwVNGKJj6lw)
 #### [Dev Post](https://devpost.com/software/newsreel-xeqrj6)
 
@@ -8,10 +8,8 @@
 `ml.py`
 ### Web Scraper
 `main.py`
-
 ### Flask Service
 `serverV2.py`
-
 ### Final Sorted List
 `static/data2.json`
 
