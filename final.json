@@ -1,0 +1,236 @@
+[
+  [
+    "The Guardian",
+    "https://www.theguardian.com/world/2020/oct/17/covid-reinfections-to-be-expected-as-virus-spreads-say-government-scientists",
+    0.8276163935661316
+  ],
+  ["BBC", "https://www.bbc.com/news/health-54545490", 0.8207411766052246],
+  ["BBC", "https://www.bbc.com/news/uk-54584583", 0.7856967449188232],
+  [
+    "Daily Mail",
+    "https://www.dailymail.co.uk/debate/article-8851059/LORD-SUMPTION-Im-meet-person-plans-obey-mixing-ban.html",
+    0.7714674472808838
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/survival-rate-of-intensive-care-coronavirus-patients-has-improved-13437841/",
+    0.7609186172485352
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/thousands-of-protesters-fill-london-streets-after-capital-moved-to-tier-2-rules-13438503/",
+    0.7467914819717407
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/wales-set-for-17-day-circuit-break-lockdown-next-week-leaked-letter-claims-13439540/",
+    0.7452987432479858
+  ],
+  [
+    "Express",
+    "https://www.express.co.uk/news/uk/1349062/jeremy-corbyn-news-jeremy-corbyn-coronavirus-rule-break-party-corbyn-pictures",
+    0.7235005497932434
+  ],
+  ["BBC", "https://www.bbc.com/news/health-54528983", 0.7226049304008484],
+  ["BBC", "https://www.bbc.com/news/uk-51768274", 0.7200295329093933],
+  [
+    "Daily Star",
+    "https://www.dailystar.co.uk/news/anti-lockdown-protesters-swarm-london-22862755",
+    0.7174457907676697
+  ],
+  [
+    "Standard",
+    "https://www.standard.co.uk/news/uk/uk-coronavirus-cases-today-deaths-a4572002.html",
+    0.7087317705154419
+  ],
+  ["BBC", "https://www.bbc.com/news/uk-54373904", 0.7071220874786377],
+  [
+    "Express",
+    "https://www.express.co.uk/news/uk/1349046/coronavirus-latest-news-schools-boris-johnson-circuit-breaker-half-term",
+    0.7065116167068481
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/coronavirus-deaths-exceed-100-for-fifth-day-in-row-with-16171-new-cases-13438555/",
+    0.698971152305603
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/society/2020/oct/17/are-we-near-to-having-a-vaccine-for-covid-19",
+    0.6963709592819214
+  ],
+  ["BBC", "https://www.bbc.com/news/explainers-52530518", 0.6961348652839661],
+  [
+    "Daily Mail",
+    "https://www.dailymail.co.uk/debate/article-8850815/DAN-HODGES-follow-science-scientists-havent-foggiest.html",
+    0.6886451840400696
+  ],
+  ["BBC", "https://www.bbc.com/news/newsbeat-54540188", 0.6852534413337708],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/confusion-for-greater-manchester-as-row-between-no-10-and-andy-burnham-continues-13438415/",
+    0.6837894916534424
+  ],
+  [
+    "cdc",
+    "https://wwwnc.cdc.gov/travel/notices/warning/coronavirus-united-kingdom",
+    0.6817099452018738
+  ],
+  ["UK Gov", "https://www.gov.uk/coronavirus", 0.6683663725852966],
+  [
+    "CNN",
+    "https://www.cnn.com/2020/10/16/uk/london-coronavirus-restrictions-gbr-intl/index.html",
+    0.6639325022697449
+  ],
+  [
+    "Standard",
+    "https://www.standard.co.uk/news/uk/wales-circuitbreaker-lockdown-friday-a4572006.html",
+    0.6570548415184021
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/us-news/2020/oct/17/american-crisis-review-andrew-cuomo-new-york-covid-trump-biden",
+    0.6465988159179688
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/world/ng-interactive/2020/sep/21/coronavirus-covid-19-map-us-cases-deaths-state-by-state",
+    0.6445269584655762
+  ],
+  [
+    "Travel Health Pro",
+    "https://travelhealthpro.org.uk/news/499/novel-coronavirus-covid-19-general-advice-for-travellers",
+    0.6380066871643066
+  ],
+  [
+    "Guardian",
+    "https://www.theguardian.com/world/2020/oct/17/coronavirus-1-million-young-britons-face-jobs-crisis-within-weeks",
+    0.6280804872512817
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/world/2020/oct/16/coronavirus-covid-19-cases-us-8-million",
+    0.6274049878120422
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/commentisfree/2020/oct/03/the-observer-view-on-donald-trumps-coronavirus-infection",
+    0.622929036617279
+  ],
+  [
+    "Express",
+    "https://www.express.co.uk/news/uk/1349063/coronavirus-news-scientists-Christmas-vaccine-tests-covid-19",
+    0.6102430820465088
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/can-travel-wales-work-tier-lockdown-coronavirus-uk-13437925/",
+    0.5916138291358948
+  ],
+  [
+    "Guardian",
+    "https://www.theguardian.com/world/2020/oct/17/coronavirus-us-records-highest-daily-case-total-since-july",
+    0.5807313919067383
+  ],
+  [
+    "Daily Star",
+    "https://www.dailystar.co.uk/news/latest-news/brits-told-self-isolate-nhs-22863389",
+    0.5801242589950562
+  ],
+  [
+    "Standard",
+    "https://www.standard.co.uk/news/uk/sage-coronavirus-pandemic-not-changing-a4571934.html",
+    0.5787529945373535
+  ],
+  [
+    "Daily Star",
+    "https://www.dailystar.co.uk/news/latest-news/queen-used-government-boost-public-22862288",
+    0.5644885301589966
+  ],
+  [
+    "Daily Star",
+    "https://www.dailystar.co.uk/news/latest-news/breaking-wales-face-two-week-22862617",
+    0.558396577835083
+  ],
+  [
+    "Daily Mail",
+    "https://www.dailymail.co.uk/news/article-8851195/Global-coronavirus-cases-rise-400-000-one-day-time.html",
+    0.5531570315361023
+  ],
+  [
+    "Daily Mail",
+    "https://www.dailymail.co.uk/health/article-8850511/Is-tracking-super-spreader-REAL-key-beating-Covid-19.html",
+    0.5524614453315735
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/more-than-220-cambridge-students-told-to-self-isolate-after-18-cases-in-halls-13439699/",
+    0.5509612560272217
+  ],
+  [
+    "Daily Star",
+    "https://www.dailystar.co.uk/news/latest-news/harrowing-video-shows-coronavirus-patients-22860826",
+    0.541723906993866
+  ],
+  [
+    "The Guardian",
+    "https://www.theguardian.com/uk-news/2020/oct/10/a-covid-tsunami-may-be-about-to-overwhelm-struggling-hospitals",
+    0.537083625793457
+  ],
+  [
+    "Daily Mail",
+    "https://www.dailymail.co.uk/travel/travel_news/article-8850017/How-navigate-new-rules-travel-coronavirus-era.html",
+    0.5342613458633423
+  ],
+  [
+    "Standard",
+    "https://www.standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html",
+    0.5336365699768066
+  ],
+  [
+    "Standard",
+    "http://standard.co.uk/news/uk/uk-coronavirus-live-latest-updates-london-tier-2-lockdown-lancashire-a4571981.html",
+    0.5336365699768066
+  ],
+  [
+    "CNN",
+    "https://www.cnn.com/2020/10/16/business/uk-brexit-deal-economy/index.html",
+    0.5184600949287415
+  ],
+  [
+    "CNN",
+    "https://www.cnn.com/2020/10/16/uk/multi-generational-households-coronavirus-gbr-intl/index.html",
+    0.5182846188545227
+  ],
+  [
+    "Metro",
+    "https://metro.co.uk/2020/10/17/mayor-of-liverpools-brother-dies-after-battle-with-coronavirus-13437773/",
+    0.516456663608551
+  ],
+  [
+    "Express",
+    "https://www.express.co.uk/news/royal/1349086/Queen-health-queen-Elizabeth-ii-coronavirus-vaccine-royal-family-news-evg",
+    0.4618334472179413
+  ],
+  [
+    "Telegraph",
+    "https://www.telegraph.co.uk/politics/2020/10/17/tony-blair-accused-breaking-quarantine-rules-us-trip/",
+    0.45742231607437134
+  ],
+  [
+    "Ft",
+    "https://www.ft.com/content/33860194-546a-42cd-92ca-a0ca3703e95c",
+    0.41964292526245117
+  ],
+  [
+    "Guardian",
+    "https://www.theguardian.com/commentisfree/2020/oct/11/as-the-tide-of-coronavirus-swells-again-boris-johnson-heads-into-a-perfect-storm",
+    0.3497980833053589
+  ],
+  [
+    "Guardian",
+    "https://www.theguardian.com/world/live/2020/oct/17/coronavirus-live-news-us-cases-pass-8m-hope-in-victoria-after-just-one-new-case-recorded",
+    0.34840163588523865
+  ],
+  ["Ft", "https://www.ft.com/reports/colombia-covid", 0.31800585985183716]
+]

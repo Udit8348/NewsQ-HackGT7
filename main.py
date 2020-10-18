@@ -38,7 +38,7 @@ class Gsearch_python:
 
             return article_text, len(links)
         except:
-            return "Does not allow scraping"
+            return None
     
     def isSwearWord(self, word):
         f = open("swearWordsList.txt", "r")
@@ -80,20 +80,20 @@ class Gsearch_python:
 
     def getUrls(self):
         urls = []
-        scores = []
+        # scores = []
         prov = []
-        with open('training_data.csv') as csvfile:
+        with open('check_data.csv') as csvfile:
             fileReader = csv.reader(csvfile, delimiter=',')
             for line in fileReader:
                 prov.append(line[0])
                 link = line[1].rstrip("\n")
                 urls.append(link)
-                scores.append(float(line[2]))
+                # scores.append(float(line[2]))
         if(LOG):
             # print(urls)
             # print(scores)
             print()
-        return urls, scores, prov
+        return urls, prov
         
         '''
         for u in f:
@@ -122,8 +122,8 @@ if __name__=='__main__':
     dictionary = dict()
     rescsv = gs.getUrls()
     urls = rescsv[0]
-    scores = rescsv[1]
-    provider = rescsv[2]
+    # scores = rescsv[1]
+    provider = rescsv[1]
     xVals = []
     yVals = []
     articleVals = []
@@ -131,80 +131,83 @@ if __name__=='__main__':
     for url in urls:
         # print(url)
         res = gs.getSiteText(url)
-        text = res[0]
-        numLinks = res[1]
+        if res != None:
+            text = res[0]
+            if len(text.encode('utf-8')) < 131072:
+                numLinks = res[1]
+                print(numLinks)
 
-    
-        quotationCount = 0
-        for char in text:
-            if  (not char.isalpha()) and char == '”' or char == '“':
-                quotationCount += 1
-        if(quotationCount % 2 == 1):
-            quotationCount += 1
-        quotationCount /= 2
+            
+                quotationCount = 0
+                for char in text:
+                    if  (not char.isalpha()) and char == '”' or char == '“':
+                        quotationCount += 1
+                if(quotationCount % 2 == 1):
+                    quotationCount += 1
+                quotationCount /= 2
 
-        # Tone analyzation
-        
-        joyScore = float(0.00)
-        fearScore = float(0.00)
-        sadnessScore = float(0.00)
-        angerScore = float(0.00)
-        analyticalScore = float(0.00)
-        confidentScore = float(0.00)
-        tentativeScore = float(0.00)
-        for tone in gs.getTones(text)['document_tone']['tones']:
-            if tone['tone_name'] == "Joy":
-                joyScore = float(tone['score'])
-            elif tone['tone_name'] == "Fear":
-                fearScore = float(tone['score'])
-            elif tone['tone_name'] == "Sadness":
-                sadnessScore = float(tone['score'])
-            if tone['tone_name'] == "Anger":
-                angerScore = float(tone['score'])
-            if tone['tone_name'] == "Analytical":
-                analyticalScore = float(tone['score'])
-            if tone['tone_name'] == "Confident":
-                confidentScore = float(tone['score'])
-            if tone['tone_name'] == "Tentative":
-                tentativeScore = float(tone['score'])
+                # Tone analyzation
+                
+                joyScore = float(0.00)
+                fearScore = float(0.00)
+                sadnessScore = float(0.00)
+                angerScore = float(0.00)
+                analyticalScore = float(0.00)
+                confidentScore = float(0.00)
+                tentativeScore = float(0.00)
+                for tone in gs.getTones(text)['document_tone']['tones']:
+                    if tone['tone_name'] == "Joy":
+                        joyScore = float(tone['score'])
+                    elif tone['tone_name'] == "Fear":
+                        fearScore = float(tone['score'])
+                    elif tone['tone_name'] == "Sadness":
+                        sadnessScore = float(tone['score'])
+                    if tone['tone_name'] == "Anger":
+                        angerScore = float(tone['score'])
+                    if tone['tone_name'] == "Analytical":
+                        analyticalScore = float(tone['score'])
+                    if tone['tone_name'] == "Confident":
+                        confidentScore = float(tone['score'])
+                    if tone['tone_name'] == "Tentative":
+                        tentativeScore = float(tone['score'])
 
-        
-        textListFull = word_tokenize(text)
-        textList = [word for word in textListFull if word.isalpha()]
+                
+                textListFull = word_tokenize(text)
+                textList = [word for word in textListFull if word.isalpha()]
 
 
-        # figure out reader mode
-        # [done] run things like the mood sentiment, get those scores
-            # Joy, Fear, Sadness, Anger, Analytical, Confident, and Tentative
-        # [done] hyperlinks (count the number of <a href> tags), is this possible in reader modes?
-        # [done] find number of swear words. just .contains off of a pre-existed text file
-        # [done] typo count. go through english dictionary, if word is not there then consider it type - binary search, maybe scratch
-        # [done] quotation count, just go through and count lol
-        # top word frequency - use nltk
-        # input it into a json and give that json to ignacio
-            # each score/data point is a separate column
-        # [done] get a list of working websites (we can start with out existing ones)
+                # figure out reader mode
+                # [done] run things like the mood sentiment, get those scores
+                    # Joy, Fear, Sadness, Anger, Analytical, Confident, and Tentative
+                # [done] hyperlinks (count the number of <a href> tags), is this possible in reader modes?
+                # [done] find number of swear words. just .contains off of a pre-existed text file
+                # [done] typo count. go through english dictionary, if word is not there then consider it type - binary search, maybe scratch
+                # [done] quotation count, just go through and count lol
+                # top word frequency - use nltk
+                # input it into a json and give that json to ignacio
+                    # each score/data point is a separate column
+                # [done] get a list of working websites (we can start with out existing ones)
 
-        numSwearWords = 0
-        numTypo = 0
-        spell = SpellChecker()
-        spell.word_frequency.load_words(['covid', 'quarantining', 'sanitizing', 'hospitalizations', 'website', 'COVID-19'])
-        wordCount = len(textList)
+                numSwearWords = 0
+                numTypo = 0
+                spell = SpellChecker()
+                spell.word_frequency.load_words(['covid', 'quarantining', 'sanitizing', 'hospitalizations', 'website', 'COVID-19'])
+                wordCount = len(textList)
 
-        for word in textList:
-            numTypo += len(spell.unknown([word]))
-            if gs.isSwearWord(word):
-                numSwearWords += 1
-        articleVals.append([provider[count], url])
-        xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords, numLinks, wordCount])
-        yVals.append(scores[count])
+                for word in textList:
+                    numTypo += len(spell.unknown([word]))
+                    if gs.isSwearWord(word):
+                        numSwearWords += 1
+                articleVals.append([provider[count], url])
+                xVals.append([quotationCount, joyScore, fearScore, sadnessScore, angerScore, analyticalScore, confidentScore, tentativeScore, numTypo, numSwearWords, numLinks, wordCount])
+                # yVals.append(scores[count])
         count += 1
 
     dictionary['ARTICLES'] = articleVals
     dictionary['X'] = xVals
-    dictionary['Y'] = yVals
+    # dictionary['Y'] = yVals
     
-    with open("json_training_data.json", "w") as outfile:
+    with open("json_check_data.json", "w") as outfile:
         json.dump(dictionary, outfile, sort_keys=True, indent=4)
 
     print(dictionary)

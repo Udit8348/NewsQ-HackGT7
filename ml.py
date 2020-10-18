@@ -52,6 +52,15 @@ def parseJSONFile(filename:str) -> Tuple[Tuple[str, str], List[List[float]], Lis
         pass
     return [], np.zeros(0), np.zeros(0)
 
+def parseJSONFileNoY(filename:str) -> Tuple[Tuple[str, str], List[List[float]], List[float]]:
+    try:
+        with open(filename, "r") as f:
+            data = json.load(f)
+            return list(map(lambda x: tuple(x), data["ARTICLES"])), np.array(data["X"])
+    except IOError:
+        pass
+    return [], np.zeros(0), np.zeros(0)
+
 def main() -> None:
     ARTICLES, X, Y = parseJSONFile("json_training_data.json")
     print(ARTICLES)
@@ -63,7 +72,18 @@ def main() -> None:
     scaler.fit(X)
     normalizedX = scaler.transform(X)
     model = getModel(normalizedX, Y)
-    print(model.predict(normalizedX))
+    NEW_ARTICLES, NEW_X = parseJSONFileNoY("json_output_data.json")
+    scaler.fit(NEW_X)
+    normalizedNEW_X = scaler.transform(NEW_X)
+    predictions = model.predict(normalizedNEW_X)
+    print(predictions)
+    result = []
+    for i in range(len(NEW_ARTICLES)):
+        result.append([NEW_ARTICLES[i][0], NEW_ARTICLES[i][1], float(predictions[i][0])])
+    result.sort(key = lambda x: x[2], reverse = True)
+    with open("final.json", "w") as f:
+        f.write(str(result).replace("'", "\""))
+    print(*result, sep = "\n")
 
 if __name__ == "__main__":
     main()

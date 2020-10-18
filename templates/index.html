@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="utf-8" />
+  <title>Hello world!</title>
+  <link type="text/css" rel="stylesheet"
+        href="{{ url_for('static',
+              filename='hello.css')}}" />
+</head>
+<body>
+      <h1 class="Heading">
+            Team name
+      </h1>
+      <div class="Description">
+            Description here
+      </div>
+      <div class="Links-container" id="js-links-wrapper">
+      </div>
+      <script type="text/javascript" src="data.json"></script>
+      <script>
+            // read the json with all of the links
+            // display the link and a picture of the sponsor
+            // this should all go under Links-container
+            // structure of the div's
+            // <div class="Link-wrapper">
+            //    <div class="Link-rank">
+            //    <div class="Link-picture">
+            //    <a class="Title" href=link>
+            var linksContainer = document.getElementById("js-links-wrapper");
+            //var mydata = JSON.parse(data);
+            var links = ["google.com"] //get this from mydata
+            for (var i = 0; i < links.length; i++) {
+                  var wrapper = document.createElement("div");
+                  var rank = document.createElement("div")
+                  var link = document.createElement("a");
+                  wrapper.appendChild(rank);
+                  wrapper.appendChild(link);
+                  linksContainer.appendChild(wrapper);
+                  rank.innerHTML = i + 1;
+                  link.href = links[i];
+                  link.innerHTML = "Google";
+                  link.title = "Google";
+            }
+            
+      </script>
+
+</body>
+</html>
