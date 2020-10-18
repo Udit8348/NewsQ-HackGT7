@@ -13,6 +13,9 @@
 ### Final Sorted List
 `static/data2.json`
 
+### Final CSV
+`data2.csv`
+
 #### Authors
 Megan Dass <mdass1001@gmail.com>\
 Ignacio Di Leva <idileva@gatech.edu>\
