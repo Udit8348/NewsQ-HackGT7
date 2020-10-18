@@ -29,7 +29,7 @@ def getModel() -> Optional[tf.keras.Sequential]:
         tf.keras.layers.Dense(units = 1, input_shape=(normalizedX.shape[1],), activation='sigmoid'),
     ])
     model.compile(optimizer='sgd', loss='mse')
-    train_history = model.fit(normalizedX, Y, epochs=500)
+    train_history = model.fit(normalizedX, Y, epochs=20000)
     return model, scaler
 
 model, scaler = getModel()
