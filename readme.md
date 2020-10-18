@@ -1,4 +1,5 @@
-## NewsReel
+## NewsReel[
+[NewsReel](newsreel.nuclide.tech)
 [Design Document](https://drive.google.com/file/d/1pTJ9m88R7vYW9w-dqvYAWBwB5jZeFq-i/view?usp=sharing)
 [Recorded Presentation - Youtube](https://youtu.be/zwVNGKJj6lw)
 [Dev Post]()
